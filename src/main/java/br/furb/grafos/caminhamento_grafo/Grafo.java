@@ -42,11 +42,13 @@ public class Grafo {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
 	}
 
-	private void eulerizar() {
-		// TODO Auto-generated method stub
-		
+	public void eulerizar() {
+		// pegar os vertices que são impares
+		// aplicar djikstra em todos eles
+		// fazer analise de qual da menor custo
+		// duplicar o percurso do menor custo(olhar foto)
 	}
 }
