@@ -15,6 +15,7 @@ public class Grafo {
 		this.matrizAdjacencia = matrizAdjacencia;
 	}
 
+	//====================================== main
 	public static void main(String[] args) {
 	try (BufferedReader br = new BufferedReader(new FileReader("grafo.txt"))) {
 			int nVertices = 0;
@@ -44,11 +45,9 @@ public class Grafo {
 		}
 		
 	}
+	//======================================
 
-	public void eulerizar() {
-		// pegar os vertices que são impares
-		// aplicar djikstra em todos eles
-		// fazer analise de qual da menor custo
-		// duplicar o percurso do menor custo(olhar foto)
+	public Grafo eulerizar() {
+		return new Eulerizar(this).getGrafo();
 	}
 }
