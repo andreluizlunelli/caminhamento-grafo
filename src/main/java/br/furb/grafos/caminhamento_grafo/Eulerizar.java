@@ -6,8 +6,12 @@ import java.util.List;
 public class Eulerizar {
 
 	private Grafo grafo;
+	private int[][] matrizAdjacenciaImpares;
 	
-	public Eulerizar(Grafo grafo) {
+	public Eulerizar(Grafo grafo) throws GrafoNulo {
+		if (grafo == null) {
+			throw new GrafoNulo();
+		}
 		this.grafo = grafo;
 	}
 
@@ -16,33 +20,20 @@ public class Eulerizar {
 	}
 
 	public Grafo aplicar() {
-		int[][] verticesImpares = obterVerticesImpares();
+		obterVerticesImpares();
 		
 		return null;
 	}
-
-	private int[][] obterVerticesImpares() {
-		int[][] matrizAdjacencia, matrizImpares = null;
-		List matrizImparesTmp = new ArrayList(); 
-		matrizAdjacencia = this.grafo.getMatrizAdjacencia();
-		int numVertices = 0;
-		for (int i = 0; i < matrizAdjacencia.length; i++) {
-			for (int j = 0; j < matrizAdjacencia.length; j++) {
-				if (matrizAdjacencia[i][j] > 0) {
-					numVertices += matrizAdjacencia[i][j];
-				}				
-			}
-			if (numVertices % 2 != 0) {
-				matrizImparesTmp.add(matrizAdjacencia[i]);
-			}
-			numVertices = 0;
-		}
-		matrizImpares = new int[matrizImparesTmp.size()][matrizImparesTmp.size()];
-		for (int i = 0; i < matrizImparesTmp.size(); i++) {
-			matrizImpares[i] = ((int[]) matrizImparesTmp.get(i));
-		}
-		return matrizImpares;
-	}
 	
+	
+	public List<Vertice> obterVerticesImpares() {
+		List<Vertice> impares = new ArrayList<>();
+		for (Vertice v : this.grafo.getVertices()) {
+			if (v.grau() % 2 != 0) {
+				impares.add(v);
+			}
+		}
+		return impares;
+	}		
 	
 }
