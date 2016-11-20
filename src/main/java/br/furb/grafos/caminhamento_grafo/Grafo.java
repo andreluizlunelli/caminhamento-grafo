@@ -46,8 +46,12 @@ public class Grafo {
 		
 	}
 	//======================================
+	
+	public int[][] getMatrizAdjacencia() {
+		return this.matrizAdjacencia;
+	}
 
 	public Grafo eulerizar() {
-		return new Eulerizar(this).getGrafo();
+		return new Eulerizar(this).aplicar();
 	}
 }
