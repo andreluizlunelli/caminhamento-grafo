@@ -3,11 +3,10 @@ package br.furb.grafos.caminhamento_grafo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Eulerizar {
+public final class Eulerizar implements Aplicar {
 
 	private Grafo grafo;
-	private int[][] matrizAdjacenciaImpares;
-	
+
 	public Eulerizar(Grafo grafo) throws GrafoNulo {
 		if (grafo == null) {
 			throw new GrafoNulo();
@@ -19,21 +18,20 @@ public class Eulerizar {
 		return grafo;
 	}
 
+	@Override
 	public Grafo aplicar() {
-		obterVerticesImpares();
+		List<Vertice> obterVerticesImpares = obterVerticesImpares();
 		
+
 		return null;
 	}
-	
-	
+
 	public List<Vertice> obterVerticesImpares() {
 		List<Vertice> impares = new ArrayList<>();
-		for (Vertice v : this.grafo.getVertices()) {
-			if (v.grau() % 2 != 0) {
+		for (Vertice v : this.grafo.getVertices())
+			if (v.grau() % 2 != 0)
 				impares.add(v);
-			}
-		}
 		return impares;
-	}		
-	
+	}
+
 }
