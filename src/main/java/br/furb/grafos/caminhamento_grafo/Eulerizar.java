@@ -29,18 +29,17 @@ public class Eulerizar {
 		for (int i = 0; i < matrizAdjacencia.length; i++) {
 			for (int j = 0; j < matrizAdjacencia.length; j++) {
 				if (matrizAdjacencia[i][j] > 0) {
-					numVertices = matrizAdjacencia[i][j];
+					numVertices += matrizAdjacencia[i][j];
 				}				
 			}
 			if (numVertices % 2 != 0) {
-				matrizImparesTmp.add(new int[numVertices]);
+				matrizImparesTmp.add(matrizAdjacencia[i]);
 			}
+			numVertices = 0;
 		}
 		matrizImpares = new int[matrizImparesTmp.size()][matrizImparesTmp.size()];
 		for (int i = 0; i < matrizImparesTmp.size(); i++) {
-			for (int j = 0; j < ((int[]) matrizImparesTmp.get(i)).length; j++) {
-				matrizImpares[i][j] = ((int[]) matrizImparesTmp.get(i))[j];
-			}
+			matrizImpares[i] = ((int[]) matrizImparesTmp.get(i));
 		}
 		return matrizImpares;
 	}
