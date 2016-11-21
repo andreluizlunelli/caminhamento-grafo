@@ -5,7 +5,8 @@ import java.util.List;
 public final class Dijkstra implements Aplicar {
 	
 	public static long INFINITO = Long.MAX_VALUE;
-	private Grafo grafo;
+	private Grafo grafoOriginal;
+	private Grafo g;
 	
 	private Vertice S;
 	private Vertice v;
@@ -16,11 +17,29 @@ public final class Dijkstra implements Aplicar {
 		if (grafo == null) {
 			throw new GrafoNulo();
 		}
-		this.grafo = grafo;
+		this.grafoOriginal = grafo;
+		this.g = grafo.clone();
 	}
 
 	@Override
-	public Grafo aplicar() {
+	public Grafo aplicar() {	
+		for (Vertice v : g.getVertices()) {
+			List<Vertice> vlist = v.getAdjacentes();
+			for (Vertice vaux : vlist) {
+				
+			}
+			
+		}
+		
+		return null;
+	}
+	
+	private Aresta getAresta(Vertice ponto1, Vertice ponto2) {
+		for (Aresta a : g.getArestas()) {
+			if (a.getPonta1() == ) {
+				
+			}
+		}
 		return null;
 	}
 	

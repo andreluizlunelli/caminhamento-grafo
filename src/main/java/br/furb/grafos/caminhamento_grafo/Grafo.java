@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Grafo {
+public class Grafo implements Cloneable {
 
 	private static final String[] TIPO_ROTULOS = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
 			"O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
@@ -39,6 +39,12 @@ public class Grafo {
 			v.setAdjacentes(adjacentes);
 			i++;
 		}
+	}
+
+	public Grafo(Grafo grafo) {
+		this.matrizAdjacencia = grafo.matrizAdjacencia;
+		this.vertices = grafo.vertices;
+		this.arestas = grafo.arestas;
 	}
 
 	// ====================================== main
@@ -108,6 +114,14 @@ public class Grafo {
 
 	public List<Vertice> getVertices() {
 		return vertices;
+	}
+	
+	public List<Aresta> getArestas() {
+		return arestas;
+	}
+	
+	public Grafo clone() {
+		return new Grafo(this);
 	}
 
 }
