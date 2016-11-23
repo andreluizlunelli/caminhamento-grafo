@@ -28,7 +28,8 @@ public class Main {
 			}
 			Grafo grafo = new Grafo(matrizAdjacencia);
 			Grafo eulerizado = grafo.eulerizar();
-			
+			int[][] retornaMatrizPFleury = eulerizado.retornaMatrizPFleury();
+			System.out.println(new Fleury().geraCicloEuleriano(retornaMatrizPFleury));
 
 		} catch (IOException e) {
 			e.printStackTrace();

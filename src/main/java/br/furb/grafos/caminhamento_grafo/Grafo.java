@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.furb.grafos.caminhamento_grafo.Eulerizar.ParDeVertices;
+
 public class Grafo implements Cloneable {
 
 	private static final String[] TIPO_ROTULOS = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
@@ -13,6 +15,7 @@ public class Grafo implements Cloneable {
 	private int[][] matrizAdjacencia;
 	private List<Vertice> vertices = new ArrayList<>();
 	private List<Aresta> arestas = new ArrayList<>();
+	public Eulerizar eulerizar;
 
 	public Grafo(int[][] matrizAdjacencia) {
 		this.matrizAdjacencia = matrizAdjacencia;
@@ -59,12 +62,34 @@ public class Grafo implements Cloneable {
 
 	public Grafo eulerizar() {
 		Grafo eulerizado = null;
-		try {
-			eulerizado = new Eulerizar(this).aplicar();
+		try {			
+			eulerizar = new Eulerizar(this);
+			eulerizado = eulerizar.aplicar();
+			eulerizado.eulerizar = eulerizar; 
 		} catch (GrafoNulo e) {
 			e.printStackTrace();
 		}
 		return eulerizado;
+	}
+	
+	public int[][] retornaMatrizPFleury() {
+		int[][] matriz = new int[this.getVertices().size()][this.getVertices().size()];
+		int[][] aux = this.matrizAdjacencia;
+		for (int i = 0; i < aux.length; i++) {
+			int qtd = 0;
+			for (int j = 0; j < aux.length; j++) {
+				if (aux[i][j]>0) {
+					matriz[i][j]++;
+				}
+			}
+		}
+		ParDeVertices[] combinacaoVertices = eulerizar.getCombinacaoVertices();
+		for (int i = 0; i < combinacaoVertices.length; i++) {
+			ParDeVertices auxVertices = combinacaoVertices[i];
+			matriz[auxVertices.v1][auxVertices.v2]++;
+			matriz[auxVertices.v2][auxVertices.v1]++;
+		}
+		return matriz;
 	}
 
 	public int[][] getMatrizAdjacencia() {

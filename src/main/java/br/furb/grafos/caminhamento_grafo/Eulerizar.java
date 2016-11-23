@@ -8,6 +8,11 @@ import br.furb.grafos.caminhamento_grafo.Eulerizar.ParDeVertices;
 public final class Eulerizar implements Aplicar {
 
 	private Grafo grafo;
+	private ParDeVertices[] combinacaoVertices;
+	
+	public ParDeVertices[] getCombinacaoVertices() {
+		return combinacaoVertices;
+	}
 
 	public Eulerizar(Grafo grafo) throws GrafoNulo {
 		if (grafo == null) {
@@ -26,7 +31,7 @@ public final class Eulerizar implements Aplicar {
 		List<DijkstraMatriz> dijkstraMatrizs = new ArrayList<>();
 		for (Vertice v : verticesImpares) 
 			dijkstraMatrizs.add(new DijkstraMatriz(this.grafo.getMatrizAdjacencia(), v.getIndiceMatriz()));		
-		ParDeVertices[] combinacaoVertices = combinacaoVertices(dijkstraMatrizs);
+		combinacaoVertices = combinacaoVertices(dijkstraMatrizs);
 		for (int i = 0; i < combinacaoVertices.length; i++) {
 			ParDeVertices parDeVertices = combinacaoVertices[i];
 			Aresta aresta = getArestaPDuplicar(parDeVertices);
