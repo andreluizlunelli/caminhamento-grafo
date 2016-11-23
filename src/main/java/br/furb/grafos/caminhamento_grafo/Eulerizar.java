@@ -37,15 +37,22 @@ public final class Eulerizar implements Aplicar {
 		return impares;
 	}
 	
-	class ParVertices {
+	
+	class ParDeVertices {
 		public int v1;
 		public int v2;
 		public int custo;
 	}
-	private ParVertices[] combinacaoVertices(List<DijkstraMatriz> dijkstraMatrizs) {
+	
+	class ParDeVerticesEscolhido {
+		public ParDeVertices pv1;
+		public ParDeVertices pv2;
+	}
+	
+	
+	private ParDeVertices[] combinacaoVertices(List<DijkstraMatriz> dijkstraMatrizs) {
 		int size = dijkstraMatrizs.size();
-		ParVertices[] listParVertices = new ParVertices[size/2];
-		ParVertices[] combinacoes = new ParVertices[size-1];
+		ParDeVertices[] combinacoes = new ParDeVertices[size-1];
 		for (int i = 0; i < size-1; i++) {
 			int auxCusto = Integer.MAX_VALUE;
 			int vAux= 0;
@@ -58,14 +65,31 @@ public final class Eulerizar implements Aplicar {
 					vAux = aux;
 				}
 			}
-			ParVertices parVertices = new ParVertices();
+			ParDeVertices parVertices = new ParDeVertices();
 			parVertices.custo = auxCusto;
 			parVertices.v1 = dAux.getVerticeOrigem();
 			parVertices.v2 = vAux;
 			combinacoes[i] = parVertices;
 		}
-		
-		return null;
+		ParDeVertices[] parVerticeCustoAux = new ParDeVertices[2];
+		int custoAux = Integer.MAX_VALUE;
+		for (int i = 0; i < combinacoes.length-1; i++) {
+			ParDeVertices auxParDeVertices1 = combinacoes[i];
+			for (int j = i + 1; j < combinacoes.length; j++) {
+				ParDeVertices auxParDeVertices2 = combinacoes[j];
+				if (auxParDeVertices1.v1 == auxParDeVertices2.v1 
+						|| auxParDeVertices1.v2 == auxParDeVertices2.v2 
+						|| auxParDeVertices1.v1 == auxParDeVertices2.v2
+						|| auxParDeVertices1.v2 == auxParDeVertices2.v1)
+					continue;
+				if (custoAux > (auxParDeVertices1.custo + auxParDeVertices2.custo)) {
+					custoAux = (auxParDeVertices1.custo + auxParDeVertices2.custo);
+					parVerticeCustoAux[0] = auxParDeVertices1; 
+					parVerticeCustoAux[1] = auxParDeVertices2; 
+				}
+			}
+		}
+		return parVerticeCustoAux;
 	}
 
 	
