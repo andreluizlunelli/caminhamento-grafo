@@ -7,17 +7,17 @@ public class Aresta {
     private Vertice ponta2;
     private int custo;
     
-    public Aresta(String rotulo, Vertice ponta1, Vertice v2, int custo) {
+    public Aresta(String rotulo, Vertice ponta1, Vertice ponta2, int custo) {
         this.rotulo = rotulo;
         this.ponta1 = ponta1;
-        this.ponta2 = v2;
+        this.ponta2 = ponta2;
         this.custo = custo;
     }
 
-    public Aresta(String rotulo, Vertice ponta1, Vertice v2) {
+    public Aresta(String rotulo, Vertice ponta1, Vertice ponta2) {
         this.rotulo = rotulo;
         this.ponta1 = ponta1;
-        this.ponta2 = v2;
+        this.ponta2 = ponta2;
     }
 
 	public String getRotulo() {

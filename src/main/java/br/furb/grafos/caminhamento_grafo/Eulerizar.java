@@ -3,6 +3,8 @@ package br.furb.grafos.caminhamento_grafo;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.furb.grafos.caminhamento_grafo.Eulerizar.ParDeVertices;
+
 public final class Eulerizar implements Aplicar {
 
 	private Grafo grafo;
@@ -11,7 +13,7 @@ public final class Eulerizar implements Aplicar {
 		if (grafo == null) {
 			throw new GrafoNulo();
 		}
-		this.grafo = grafo;
+		this.grafo = grafo.clone();
 	}
 
 	public Grafo getGrafo() {
@@ -19,14 +21,25 @@ public final class Eulerizar implements Aplicar {
 	}
 
 	@Override
-	public Grafo aplicar() {
+	public Grafo aplicar() {		
 		List<Vertice> verticesImpares = obterVerticesImpares();
 		List<DijkstraMatriz> dijkstraMatrizs = new ArrayList<>();
-		for (Vertice v : verticesImpares) {
-			dijkstraMatrizs.add(new DijkstraMatriz(this.grafo.getMatrizAdjacencia(), v.getIndiceMatriz()));
-		}
-		combinacaoVertices(dijkstraMatrizs);
-		return null;
+		for (Vertice v : verticesImpares) 
+			dijkstraMatrizs.add(new DijkstraMatriz(this.grafo.getMatrizAdjacencia(), v.getIndiceMatriz()));		
+		ParDeVertices[] combinacaoVertices = combinacaoVertices(dijkstraMatrizs);
+		for (int i = 0; i < combinacaoVertices.length; i++) {
+			ParDeVertices parDeVertices = combinacaoVertices[i];
+			Aresta aresta = getArestaPDuplicar(parDeVertices);
+			grafo.addAresta(aresta);
+		}		
+		return grafo;
+	}
+	
+	private Aresta getArestaPDuplicar(ParDeVertices vertices) {
+		Vertice ponta1 = grafo.getVerticeByIndex(vertices.v1);
+		Vertice ponta2 = grafo.getVerticeByIndex(vertices.v2);
+		Aresta aresta = new Aresta(String.format("e_%sd%s", vertices.v1, vertices.v2), ponta1, ponta2);
+		return aresta;
 	}
 
 	private List<Vertice> obterVerticesImpares() {
@@ -37,18 +50,11 @@ public final class Eulerizar implements Aplicar {
 		return impares;
 	}
 	
-	
 	class ParDeVertices {
 		public int v1;
 		public int v2;
 		public int custo;
 	}
-	
-	class ParDeVerticesEscolhido {
-		public ParDeVertices pv1;
-		public ParDeVertices pv2;
-	}
-	
 	
 	private ParDeVertices[] combinacaoVertices(List<DijkstraMatriz> dijkstraMatrizs) {
 		int size = dijkstraMatrizs.size();

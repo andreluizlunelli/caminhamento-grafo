@@ -11,6 +11,13 @@ public class Vertice {
 		this.rotulo = rotulo;
 		this.setIndiceMatriz(indiceMatriz);
 	}
+	
+	public Vertice(String rotulo, int indiceMatriz, ArrayList<Vertice> adjacentes) {
+		this.rotulo = rotulo;
+		this.setIndiceMatriz(indiceMatriz);
+		this.adjacentes = adjacentes;
+	}
+	
 	public String getRotulo() {
 		return rotulo;
 	}

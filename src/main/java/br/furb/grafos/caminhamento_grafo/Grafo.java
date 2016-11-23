@@ -41,10 +41,20 @@ public class Grafo implements Cloneable {
 		}
 	}
 
-	public Grafo(Grafo grafo) {
-		this.matrizAdjacencia = grafo.matrizAdjacencia;
-		this.vertices = grafo.vertices;
-		this.arestas = grafo.arestas;
+	public Grafo clone(Grafo grafo) {
+		Grafo gclonado = new Grafo(grafo.matrizAdjacencia);
+		gclonado.matrizAdjacencia = grafo.matrizAdjacencia.clone();
+		ArrayList<Aresta> cloneArestas = new ArrayList<>();
+		for (Aresta e: grafo.arestas) {
+			cloneArestas.add(new Aresta(e.getRotulo(), e.getPonta1(), e.getPonta2(), e.getCusto())); 		
+		}		
+		ArrayList<Vertice> cloneVertices = new ArrayList<>();
+		for (Vertice v: grafo.vertices) {
+			cloneVertices.add(new Vertice(v.getRotulo(), v.getIndiceMatriz(), v.getAdjacentes())); 		
+		}		
+		gclonado.vertices = cloneVertices;
+		gclonado.arestas = cloneArestas;
+		return gclonado;
 	}
 
 	public Grafo eulerizar() {
@@ -90,7 +100,18 @@ public class Grafo implements Cloneable {
 	}
 	
 	public Grafo clone() {
-		return new Grafo(this);
+		return this.clone(this);
+	}
+	
+	public void addAresta(Aresta e) {
+		this.arestas.add(e);
+	}
+	
+	public Vertice getVerticeByIndex(int index) {
+		for (Vertice v : vertices) 
+			if (v.getIndiceMatriz() == index)
+				return v;
+		return null;
 	}
 
 }

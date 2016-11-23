@@ -27,7 +27,8 @@ public class Main {
 				}
 			}
 			Grafo grafo = new Grafo(matrizAdjacencia);
-			grafo.eulerizar();
+			Grafo eulerizado = grafo.eulerizar();
+			
 
 		} catch (IOException e) {
 			e.printStackTrace();
