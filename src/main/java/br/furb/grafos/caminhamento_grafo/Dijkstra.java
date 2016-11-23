@@ -36,9 +36,9 @@ public final class Dijkstra implements Aplicar {
 	
 	private Aresta getAresta(Vertice ponto1, Vertice ponto2) {
 		for (Aresta a : g.getArestas()) {
-			if (a.getPonta1() == ) {
-				
-			}
+//			if (a.getPonta1() == ) {
+//				
+//			}
 		}
 		return null;
 	}

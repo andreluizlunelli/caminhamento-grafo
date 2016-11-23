@@ -77,4 +77,9 @@ public class DijkstraMatriz {
 		}
 		return fila.remove(indexMenorCusto);
 	}
+
+	public int getVerticeOrigem() {
+		return verticeOrigem;
+	}
+		
 }

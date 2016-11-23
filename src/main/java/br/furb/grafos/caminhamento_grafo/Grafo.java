@@ -17,7 +17,7 @@ public class Grafo implements Cloneable {
 	public Grafo(int[][] matrizAdjacencia) {
 		this.matrizAdjacencia = matrizAdjacencia;
 		for (int i = 0; i < matrizAdjacencia.length; i++) {
-			Vertice v = new Vertice(TIPO_ROTULOS[i]);
+			Vertice v = new Vertice(TIPO_ROTULOS[i], i);
 			vertices.add(v);
 		}
 		int i = 0;
@@ -46,37 +46,6 @@ public class Grafo implements Cloneable {
 		this.vertices = grafo.vertices;
 		this.arestas = grafo.arestas;
 	}
-
-	// ====================================== main
-	public static void main(String[] args) {
-		try (BufferedReader br = new BufferedReader(new FileReader("grafo.txt"))) {
-			int nVertices = 0;
-			int matrizAdjacencia[][] = null;
-			String line;
-			int nRotulo = 0;
-			while ((line = br.readLine()) != null) {
-				if (nVertices == 0) {
-					nVertices = Integer.parseInt(line);
-					matrizAdjacencia = new int[nVertices][nVertices];
-				} else {
-					String[] split = line.split(",");
-					int j = 0;
-					for (String string : split) {
-						int valAresta = Integer.parseInt(string);
-						matrizAdjacencia[nRotulo][j] = valAresta;
-						j++;
-					}
-					nRotulo++;
-				}
-			}
-			Grafo grafo = new Grafo(matrizAdjacencia);
-			grafo.eulerizar();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	// ======================================
 
 	public Grafo eulerizar() {
 		Grafo eulerizado = null;

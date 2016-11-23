@@ -3,11 +3,13 @@ package br.furb.grafos.caminhamento_grafo;
 import java.util.ArrayList;
 
 public class Vertice {
+	private int indiceMatriz;
 	private String rotulo;
 	private ArrayList<Vertice> adjacentes = new ArrayList<>();
 	
-	public Vertice(String rotulo) {
+	public Vertice(String rotulo, int indiceMatriz) {
 		this.rotulo = rotulo;
+		this.setIndiceMatriz(indiceMatriz);
 	}
 	public String getRotulo() {
 		return rotulo;
@@ -23,6 +25,12 @@ public class Vertice {
 	}
 	public int grau() {
 		return adjacentes.size();
+	}
+	public int getIndiceMatriz() {
+		return indiceMatriz;
+	}
+	public void setIndiceMatriz(int indiceMatriz) {
+		this.indiceMatriz = indiceMatriz;
 	}
 	
 }
