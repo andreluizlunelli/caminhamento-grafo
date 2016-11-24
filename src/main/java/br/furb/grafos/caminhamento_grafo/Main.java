@@ -26,6 +26,7 @@ public class Main {
 					nRotulo++;
 				}
 			}
+			alunos();
 			Grafo grafo = new Grafo(matrizAdjacencia);
 			Grafo eulerizado = grafo.eulerizar();
 			int[][] retornaMatrizPFleury = eulerizado.retornaMatrizPFleury();
@@ -34,5 +35,11 @@ public class Main {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private static void alunos() {
+		System.out.println("\n###########################################\n");
+		System.out.println("Alunos: André Luiz Lunelli e Orlando Krause");
+		System.out.println("\n###########################################\n");
 	}
 }
